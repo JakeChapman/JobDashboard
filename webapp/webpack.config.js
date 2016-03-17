@@ -47,7 +47,9 @@ module.exports = {
         test: /\.png$/,
         loader: "url-loader",
         query: { mimetype: "image/png" }
-      }
+      },
+      { test: /aws-sdk/, loaders: ["transform?brfs"]},
+      { test: /\.json$/, loaders: ['json']}
     ]
   }
 };

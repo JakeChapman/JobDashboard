@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Application from './Application.js';
 import $ from "jquery";
 import AppActions from'../flux/actions/app-actions.js';
 
@@ -16,7 +17,7 @@ export default class AppForm extends React.Component{
         let descrip = $("#jobDescrip").val();
         let comment = $("#comment").val();
         let url = $("#jobUrl").val();
-
+        let file = $("#resume").val();
 
 
         let doc = {
@@ -34,7 +35,10 @@ export default class AppForm extends React.Component{
         //TODO insert doc object into MongoDb
         console.log(doc);
 
-        AppActions.addLog(doc);
+//        AppActions.addLog(doc);
+
+        alert(file);
+        console.log(file);
 
         //Go back to home back
         ReactDOM.render(<App content={<Application/>} calendar={true}/>, document.getElementById('root'));
@@ -42,8 +46,7 @@ export default class AppForm extends React.Component{
 
     render(){
         return(
-            <div>
-                <form className="ui form" id="entryForm">
+            <div className="ui form" id="entryForm">
                     <div className="field">
                         <label>Company Name</label>
                         <input name="company-name" placeholder="Company Name" type="text" className="entryInput" id="companyName"/>
@@ -68,7 +71,9 @@ export default class AppForm extends React.Component{
                         <label>Comments</label>
                         <textarea rows="2" className="entryInput"></textarea>
                     </div>
-                </form>
+
+                <div className="ui horizontal divider"/>
+                <br/>
                 <button className="ui black button" onClick={this.DisplayFields}>Add Follow-Up</button>
                 <button className="ui blue button" onClick={this.handleAppEntry}>Submit</button>
             </div>

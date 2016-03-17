@@ -17,6 +17,33 @@ const LogApi = {
                 failure();
             }
         });
+    },
+    getAll: function(success, failure) {
+        $.ajax({
+            url: BASE_URL,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                success(data);
+            },
+            error: function(xhr, status, error) {
+                failure(error);
+            }
+        });
+    },
+
+    get: function(id, success, failure) {
+        $.ajax({
+            url: BASE_URL + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                success(data);
+            },
+            error: function(xhr, status, error) {
+                failure(error);
+            }
+        });
     }
 };
 
