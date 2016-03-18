@@ -8,7 +8,7 @@ const CHANGE_EVENT = 'change';
 
 let _logs = {};
 
-// Our client-side CRUD methods for Todos:
+// Our client-side CRUD methods for Logs:
 function create (log) {
     log.synced = false;
     _logs[log.id] = log;
@@ -18,7 +18,8 @@ function createAll (logs) {
     _logs = {};
     logs.forEach( (log) => {
         log.synced = true;
-        _logs[log.id] = log;
+        console.log(log);
+        _logs[log._id] = log;
     });
 }
 
@@ -55,7 +56,7 @@ const LogStore = assign({}, EventEmitter.prototype, {
 
     getAll: function() {
         return _logs;
-    },
+    }
 });
 
 /* Register with the App Dispatcher, and declare how the store handles various

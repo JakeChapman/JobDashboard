@@ -1,17 +1,33 @@
 import React from 'react';
+import LogStore from '../flux/stores/log-store.js';
+import AppActions from '../flux/actions/app-actions';
+import LogList from './LogList.js';
 
+const Application = React.createClass({
+    getInitialState() {
+        return ({ logs: LogStore.getAll() });
+    },
 
-export default class Application extends React.Component{
+    componentDidMount() {
+        LogStore.addChangeListener(this._onChange);
+
+        // fetch the initial list of logs from the server
+        AppActions.getLogs();
+    },
+
+    componentWillUnmount() {
+        LogStore.removeChangeListener(this._onChange);
+    },
+
+    _onChange() {
+        this.setState({ logs: LogStore.getAll() });
+    },
+
     render(){
         return(
-            <div className="ui centered card">
-                <div className="content">
-                    <div className="header">Job Title Prop goes here</div>
-                </div>
-                <div className="content">
-                    <h4 className="ui sub header">Company goes here</h4>
-                </div>
-            </div>
+            <LogList logs={this.state.logs}/>
         )
     }
-}
+});
+
+export default Application;

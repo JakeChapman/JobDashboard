@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Application from './Application.js';
 import $ from "jquery";
 import AppActions from'../flux/actions/app-actions.js';
-
+import App from '../App.js';
 export default class AppForm extends React.Component{
 
     DisplayFields(){
@@ -17,7 +17,6 @@ export default class AppForm extends React.Component{
         let descrip = $("#jobDescrip").val();
         let comment = $("#comment").val();
         let url = $("#jobUrl").val();
-        let file = $("#resume").val();
 
 
         let doc = {
@@ -35,10 +34,7 @@ export default class AppForm extends React.Component{
         //TODO insert doc object into MongoDb
         console.log(doc);
 
-//        AppActions.addLog(doc);
-
-        alert(file);
-        console.log(file);
+        AppActions.addLog(doc);
 
         //Go back to home back
         ReactDOM.render(<App content={<Application/>} calendar={true}/>, document.getElementById('root'));
